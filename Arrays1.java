@@ -76,14 +76,116 @@ public class Arrays1 {
             System.out.println();
         }
     }
+    //Max subarray sum(approach1- brute force)
+    public static void maxsubarraySum(int arr[]){
+        int maxSum = Integer.MIN_VALUE;
+        for(int i=0;i<arr.length;i++){
+            for(int j=i;j<arr.length;j++){
+                int currsum=0;
+                for(int k=i;k<=j;k++){
+                    currsum+= arr[k];
+                }
+                maxSum=Math.max(maxSum,currsum);
+                
+            }
+            
+        }
+        System.out.println("Max Sum is: "+ maxSum);
+    }
+    //Max subarray sum(approach2 - prefix sum array)
+    public static void maxsubarraySum2(int arr[]){
+        int maxSum= Integer.MIN_VALUE;
+        int prefixSum[]=new int[arr.length];
+        prefixSum[0]= arr[0];
+        for(int i=1;i<arr.length;i++){
+            prefixSum[i]= arr[i]+prefixSum[i-1];
+        }
+        for(int i=0;i<arr.length;i++){
+            int currsum=0;
+            for(int j=i;j<arr.length;j++){
+                currsum= i==0 ? prefixSum[j] : prefixSum[j]-prefixSum[i-1];
+            }
+            maxSum=Math.max(currsum, maxSum);
+        }
+        System.out.println("Max sum is: "+ maxSum);
+    }
+    //Max subarray sum (approach 3- kadane;s approach)
+    public static void maxsubarraySum3(int arr[]){
+        // if all negative in array
+        int maxSum= Integer.MIN_VALUE;
+        int maxSum1= Integer.MIN_VALUE;
+        int count=0;
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]<0){
+                count++;
+                maxSum= Math.max(maxSum, arr[i]);
+            }
+        }
+        if(count == arr.length){
+            System.out.println("Max Sum is:"+ maxSum);
+            return;
+        }
+        //Normal approach
+        int currsum=0;
+        for(int i=0;i<arr.length;i++){
+            currsum+=arr[i];
+            if(currsum<0){
+                currsum=0;
+            }
+            maxSum1= Math.max(currsum,maxSum1);
+        }
+        System.out.println("Max Sum is :"+ maxSum1);
+
+    }
+    // Trapping rainwater
+    public static void trappedrainWater(int arr[]){
+        //left max array
+        int leftMax[]= new int[arr.length];
+        leftMax[0]= arr[0];
+        for(int i=1;i<leftMax.length;i++){
+            leftMax[i]=Math.max(arr[i],leftMax[i-1]);
+        }
+        int rightMax[]= new int[arr.length];
+        rightMax[arr.length-1]=arr[arr.length-1];
+        for(int i=rightMax.length-2;i>=0;i--){
+            rightMax[i]= Math.max(arr[i],rightMax[i+1]);
+        }
+        int trappedrainWater=0;
+        int waterLevel=0;
+        for(int i=0;i<arr.length;i++){
+            waterLevel=Math.min(leftMax[i],rightMax[i]);
+            trappedrainWater+= (waterLevel - arr[i]);
+        }
+        System.out.println("Trapped rainwater is: "+ trappedrainWater);
+    }
+    //buy and sell stock
+    public static void buyandSell(int arr[]){
+        int buyPrice=Integer.MAX_VALUE;
+        int maxProfit=0;
+        for(int i=0;i<arr.length;i++){
+            if(buyPrice < arr[i]){
+                int profit= arr[i]-buyPrice;
+                maxProfit=Math.max(profit, maxProfit);
+            }
+            else{
+               buyPrice= arr[i]; 
+            }
+        }
+        System.out.println("Max profit is: "+ maxProfit);
+    }
     public static void main(String[] args){
-        int arr[] = {4,5,7,8,10};
+        int arr[]={7,1,5,3,6,4};
+        // int arr[]={-11,-2,-6,-1,-3};
+        // int arr[] = {4,5,7,8,10};
         // linearSearch(arr, 7);
         // largestNumber(arr);
         // binarySearch(arr, 10);
         // reverse(arr);
         // pairs(arr);
         // subarrays(arr);
+        // maxsubarraySum3(arr);
+        // trappedrainWater(arr);
+        buyandSell(arr);
     }
 }
 
