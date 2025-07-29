@@ -173,8 +173,20 @@ public class Arrays1 {
         }
         System.out.println("Max profit is: "+ maxProfit);
     }
+    // find duplicate
+    public static boolean findDuplicate(int nums[]) {
+        for(int i=0;i<nums.length-1;i++){
+            for(int j=i+1;j<nums.length;j++){
+                if(nums[i] == nums[j]){
+                    return true;
+                }
+            }
+        } 
+        return false;
+    }
     public static void main(String[] args){
-        int arr[]={7,1,5,3,6,4};
+        int nums[]={1,2,3,4};
+        // int arr[]={7,1,5,3,6,4};
         // int arr[]={-11,-2,-6,-1,-3};
         // int arr[] = {4,5,7,8,10};
         // linearSearch(arr, 7);
@@ -185,7 +197,8 @@ public class Arrays1 {
         // subarrays(arr);
         // maxsubarraySum3(arr);
         // trappedrainWater(arr);
-        buyandSell(arr);
+        // buyandSell(arr);
+        System.out.println(findDuplicate(nums));
     }
 }
 
