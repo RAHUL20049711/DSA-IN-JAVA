@@ -1,6 +1,21 @@
 import java.util.*;
-public class oops {
-    static class Complex{
+public  class oops {
+    
+    // Complex number 
+    public static void main(String args[]){
+        Complex c = new Complex(4, 5);
+        Complex d = new Complex(9,4);
+
+        Complex e = Complex.add(c,d);
+        Complex f = Complex.diff(c, d);
+        Complex g = Complex.product(c, d);
+        e.printComplex();
+        f.printComplex();
+        g.printComplex();
+    }
+   
+}
+class Complex{
         int real;
         int imag;
     
@@ -9,11 +24,11 @@ public class oops {
             imag=i;
         }
         //add
-        public static Complex add(Complex a, Complex b){
+        public  static Complex add(Complex a, Complex b){
             return  new Complex((a.real+b.real),(a.imag+b.imag));
         }
         // diff
-        public static Complex diff(Complex a, Complex b){
+        public  static Complex diff(Complex a, Complex b){
             return new Complex((a.real-b.real),(a.imag-b.imag));
         }
         // product
@@ -32,19 +47,6 @@ public class oops {
                 System.out.println(real+"+"+imag+"i");
             }
         }
+
     }
 
-    // Complex number 
-    public static void main(String args[]){
-        Complex c = new Complex(4, 5);
-        Complex d = new Complex(9,4);
-
-        Complex e = Complex.add(c,d);
-        Complex f = Complex.diff(c, d);
-        Complex g = Complex.product(c, d);
-        e.printComplex();
-        f.printComplex();
-        g.printComplex();
-    }
-   
-}
